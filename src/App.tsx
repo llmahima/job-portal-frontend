@@ -16,55 +16,62 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<JobList />} />
-            <Route path="/jobs/:id" element={<JobDetail />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/jobs/:id/apply"
-              element={
-                <ProtectedRoute roles={["candidate"]}>
-                  <Apply />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/jobs/new"
-              element={
-                <ProtectedRoute roles={["recruiter"]}>
-                  <CreateJob />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/jobs/:id/applications"
-              element={
-                <ProtectedRoute roles={["recruiter"]}>
-                  <JobApplications />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/applications/:id"
-              element={
-                <ProtectedRoute>
-                  <ApplicationDetail />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </Layout>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="*"
+            element={
+              <Layout>
+                <Routes>
+                  <Route path="/" element={<JobList />} />
+                  <Route path="/jobs/:id" element={<JobDetail />} />
+                  <Route
+                    path="/dashboard"
+                    element={
+                      <ProtectedRoute>
+                        <Dashboard />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/jobs/:id/apply"
+                    element={
+                      <ProtectedRoute roles={["candidate"]}>
+                        <Apply />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/jobs/new"
+                    element={
+                      <ProtectedRoute roles={["recruiter"]}>
+                        <CreateJob />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/jobs/:id/applications"
+                    element={
+                      <ProtectedRoute roles={["recruiter"]}>
+                        <JobApplications />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/applications/:id"
+                    element={
+                      <ProtectedRoute>
+                        <ApplicationDetail />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
+              </Layout>
+            }
+          />
+        </Routes>
       </AuthProvider>
     </BrowserRouter>
   )
