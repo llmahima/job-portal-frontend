@@ -20,7 +20,9 @@ export function Login() {
   const { login } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
-  const from = (location.state as { from?: { pathname: string } })?.from?.pathname ?? "/dashboard"
+  const rawFrom = (location.state as { from?: { pathname: string } })?.from?.pathname ?? "/dashboard"
+  // Don't redirect back to application detail pages after login—go to dashboard instead
+  const from = /^\/applications\/\d+$/.test(rawFrom) ? "/dashboard" : rawFrom
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
