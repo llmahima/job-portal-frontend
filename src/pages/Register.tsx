@@ -48,22 +48,20 @@ export function Register() {
   }
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[oklch(0.98_0.02_280)] font-sans p-4">
-      {/* Background Decorative Elements */}
-      <div className="absolute top-[-10%] left-[-10%] h-[40%] w-[40%] rounded-full bg-[oklch(0.7_0.2_300/0.4)] blur-[100px] animate-pulse" />
-      <div className="absolute bottom-[-10%] right-[-10%] h-[50%] w-[50%] rounded-full bg-[oklch(0.7_0.2_250/0.3)] blur-[100px] [animation-delay:1s] animate-pulse" />
-      <div className="absolute top-1/2 left-1/2 h-[30%] w-[30%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[oklch(0.8_0.15_0/0.2)] blur-[80px] [animation-delay:2s] animate-pulse" />
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background p-4">
+      <div className="absolute top-[-10%] left-[-10%] h-[40%] w-[40%] rounded-full bg-primary/20 blur-[120px]" />
+      <div className="absolute bottom-[-10%] right-[-10%] h-[50%] w-[50%] rounded-full bg-primary/15 blur-[120px]" />
 
-      <Card className="relative z-10 w-full max-w-md border-white/40 bg-white/70 shadow-2xl backdrop-blur-xl rounded-2xl">
+      <Card className="relative z-10 w-full max-w-md border border-border/60 bg-card shadow-xl rounded-2xl">
         <CardHeader className="space-y-1 pb-4 text-center">
-          <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[oklch(0.7_0.2_300)] to-[oklch(0.7_0.2_250)] shadow-lg">
+          <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={2}
-              stroke="white"
-              className="h-6 w-6 text-white"
+              stroke="currentColor"
+              className="h-6 w-6"
             >
               <path
                 strokeLinecap="round"
@@ -72,10 +70,10 @@ export function Register() {
               />
             </svg>
           </div>
-          <CardTitle className="text-3xl font-bold tracking-tight text-[oklch(0.3_0.05_280)]">
+          <CardTitle className="text-3xl font-bold tracking-tight">
             Create Account
           </CardTitle>
-          <CardDescription className="text-md font-medium text-[oklch(0.5_0.05_280)]">
+          <CardDescription className="text-md font-medium">
             Join us today as a recruiter or candidate
           </CardDescription>
         </CardHeader>
@@ -91,7 +89,7 @@ export function Register() {
             <div className="space-y-1.5">
               <Label
                 htmlFor="name"
-                className="text-sm font-semibold text-[oklch(0.4_0.05_280)]"
+                className="text-sm font-semibold"
               >
                 Full Name
               </Label>
@@ -102,13 +100,13 @@ export function Register() {
                 onChange={(e) => setName(e.target.value)}
                 required
                 autoComplete="name"
-                className="h-10 border-white/50 bg-white/50 focus-visible:ring-[oklch(0.7_0.2_300)]/30 backdrop-blur-sm transition-all focus:border-[oklch(0.7_0.2_300)]"
+                className="h-10 rounded-lg"
               />
             </div>
             <div className="space-y-1.5">
               <Label
                 htmlFor="email"
-                className="text-sm font-semibold text-[oklch(0.4_0.05_280)]"
+                className="text-sm font-semibold"
               >
                 Email Address
               </Label>
@@ -120,14 +118,14 @@ export function Register() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 autoComplete="email"
-                className="h-10 border-white/50 bg-white/50 focus-visible:ring-[oklch(0.7_0.2_300)]/30 backdrop-blur-sm transition-all focus:border-[oklch(0.7_0.2_300)]"
+                className="h-10 rounded-lg"
               />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1.5">
                 <Label
                   htmlFor="password"
-                  className="text-sm font-semibold text-[oklch(0.4_0.05_280)]"
+                  className="text-sm font-semibold"
                 >
                   Password
                 </Label>
@@ -139,21 +137,21 @@ export function Register() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   autoComplete="new-password"
-                  className="h-10 border-white/50 bg-white/50 focus-visible:ring-[oklch(0.7_0.2_300)]/30 backdrop-blur-sm transition-all focus:border-[oklch(0.7_0.2_300)]"
+                  className="h-10 rounded-lg"
                 />
               </div>
               <div className="space-y-1.5">
-                <Label className="text-sm font-semibold text-[oklch(0.4_0.05_280)]">
+                <Label className="text-sm font-semibold">
                   Role
                 </Label>
                 <Select
                   value={role}
                   onValueChange={(v) => setRole(v as UserRole)}
                 >
-                  <SelectTrigger className="h-10 border-white/50 bg-white/50 focus:ring-[oklch(0.7_0.2_300)]/30 backdrop-blur-sm transition-all">
+                  <SelectTrigger className="h-10 rounded-lg">
                     <SelectValue placeholder="Select role" />
                   </SelectTrigger>
-                  <SelectContent className="bg-white/90 backdrop-blur-xl">
+                    <SelectContent>
                     <SelectItem value="candidate">Candidate</SelectItem>
                     <SelectItem value="recruiter">Recruiter</SelectItem>
                   </SelectContent>
@@ -162,7 +160,7 @@ export function Register() {
             </div>
             <Button
               type="submit"
-              className="mt-2 h-11 w-full bg-gradient-to-r from-[oklch(0.7_0.2_300)] via-[oklch(0.65_0.2_280)] to-[oklch(0.7_0.2_250)] text-base font-bold text-white shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl active:scale-[0.98] disabled:opacity-70"
+              className="mt-2 h-11 w-full rounded-lg text-base font-bold"
               disabled={loading}
             >
               {loading ? (
@@ -174,11 +172,11 @@ export function Register() {
                 "Create Account"
               )}
             </Button>
-            <p className="text-center text-sm font-medium text-[oklch(0.5_0.1_280)]">
+            <p className="text-center text-sm font-medium text-muted-foreground">
               Already have an account?{" "}
               <Link
                 to="/login"
-                className="font-bold text-[oklch(0.6_0.2_300)] hover:underline decoration-2 transition-all"
+                className="font-bold text-primary hover:underline decoration-2 transition-all"
               >
                 Sign in
               </Link>

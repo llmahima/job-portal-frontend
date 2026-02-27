@@ -40,22 +40,20 @@ export function Login() {
   }
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[oklch(0.98_0.02_280)] font-sans">
-      {/* Background Decorative Elements */}
-      <div className="absolute top-[-10%] left-[-10%] h-[40%] w-[40%] rounded-full bg-[oklch(0.7_0.2_300/0.4)] blur-[100px] animate-pulse" />
-      <div className="absolute bottom-[-10%] right-[-10%] h-[50%] w-[50%] rounded-full bg-[oklch(0.7_0.2_250/0.3)] blur-[100px] [animation-delay:1s] animate-pulse" />
-      <div className="absolute top-1/2 left-1/2 h-[30%] w-[30%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[oklch(0.8_0.15_0/0.2)] blur-[80px] [animation-delay:2s] animate-pulse" />
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background">
+      <div className="absolute top-[-10%] left-[-10%] h-[40%] w-[40%] rounded-full bg-primary/20 blur-[120px]" />
+      <div className="absolute bottom-[-10%] right-[-10%] h-[50%] w-[50%] rounded-full bg-primary/15 blur-[120px]" />
 
-      <Card className="relative z-10 w-full max-w-md border-white/40 bg-white/70 shadow-2xl backdrop-blur-xl rounded-2xl mx-4">
+      <Card className="relative z-10 w-full max-w-md border border-border/60 bg-card shadow-xl rounded-2xl mx-4">
         <CardHeader className="space-y-1 pb-4 text-center">
-          <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[oklch(0.7_0.2_300)] to-[oklch(0.7_0.2_250)] shadow-lg">
+          <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={2}
-              stroke="white"
-              className="h-6 w-6 text-white"
+              stroke="currentColor"
+              className="h-6 w-6"
             >
               <path
                 strokeLinecap="round"
@@ -64,10 +62,10 @@ export function Login() {
               />
             </svg>
           </div>
-          <CardTitle className="text-3xl font-bold tracking-tight text-[oklch(0.3_0.05_280)]">
+          <CardTitle className="text-3xl font-bold tracking-tight">
             Job Portal
           </CardTitle>
-          <CardDescription className="text-md font-medium text-[oklch(0.5_0.05_280)]">
+          <CardDescription className="text-md font-medium">
             Welcome back! Please sign in.
           </CardDescription>
         </CardHeader>
@@ -83,7 +81,7 @@ export function Login() {
             <div className="space-y-2">
               <Label
                 htmlFor="email"
-                className="text-sm font-semibold text-[oklch(0.4_0.05_280)]"
+                className="text-sm font-semibold"
               >
                 Email Address
               </Label>
@@ -95,20 +93,20 @@ export function Login() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 autoComplete="email"
-                className="h-11 border-white/50 bg-white/50 focus-visible:ring-[oklch(0.7_0.2_300)]/30 backdrop-blur-sm transition-all focus:border-[oklch(0.7_0.2_300)]"
+                className="h-11 rounded-lg"
               />
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <Label
                   htmlFor="password"
-                  className="text-sm font-semibold text-[oklch(0.4_0.05_280)]"
+                  className="text-sm font-semibold"
                 >
                   Password
                 </Label>
                 <Link
                   to="#"
-                  className="text-xs font-medium text-[oklch(0.6_0.2_280)] hover:underline shadow-none"
+                  className="text-xs font-medium text-primary hover:underline"
                 >
                   Forgot password?
                 </Link>
@@ -121,12 +119,12 @@ export function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 autoComplete="current-password"
-                className="h-11 border-white/50 bg-white/50 focus-visible:ring-[oklch(0.7_0.2_300)]/30 backdrop-blur-sm transition-all focus:border-[oklch(0.7_0.2_300)]"
+                className="h-11 rounded-lg"
               />
             </div>
             <Button
               type="submit"
-              className="h-11 w-full bg-gradient-to-r from-[oklch(0.7_0.2_300)] via-[oklch(0.65_0.2_280)] to-[oklch(0.7_0.2_250)] text-base font-bold text-white shadow-lg transition-all hover:scale-[1.02] hover:shadow-xl active:scale-[0.98] disabled:opacity-70"
+              className="h-11 w-full rounded-lg text-base font-bold"
               disabled={loading}
             >
               {loading ? (
@@ -140,19 +138,19 @@ export function Login() {
             </Button>
             <div className="relative py-2">
               <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-[oklch(0.9_0.02_280)]" />
+                <span className="w-full border-t border-border" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-transparent px-2 text-[oklch(0.5_0.05_280)]">
+                <span className="bg-transparent px-2 text-muted-foreground">
                   Or continue with
                 </span>
               </div>
             </div>
-            <p className="text-center text-sm font-medium text-[oklch(0.5_0.1_280)]">
+            <p className="text-center text-sm font-medium text-muted-foreground">
               Don&apos;t have an account?{" "}
               <Link
                 to="/register"
-                className="font-bold text-[oklch(0.6_0.2_300)] hover:underline decoration-2 transition-all"
+                className="font-bold text-primary hover:underline decoration-2 transition-all"
               >
                 Create an account
               </Link>
