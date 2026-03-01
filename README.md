@@ -1,73 +1,81 @@
-# React + TypeScript + Vite
+# Job Portal Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend application for the Job Portal system, built with React, TypeScript, and Vite. It provides a platform for candidates to find and apply for jobs, and for recruiters to post jobs and manage applications.
 
-Currently, two official plugins are available:
+## 🏗 Architecture
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Tech Stack
+- **Framework:** React 19
+- **Language:** TypeScript
+- **Build Tool:** Vite
+- **Styling:** Tailwind CSS
+- **UI Components:** Radix UI (Headless UI components) + custom components
+- **Routing:** React Router DOM
+- **State Management:** React Context (AuthContext)
+- **Form Handling:** React Hook Form + Zod (for validation)
+- **HTTP Client:** Axios
+- **Icons:** Lucide React
 
-## React Compiler
+### Project Structure
+The `src/` directory is organized as follows:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- `api/`: Contains axios client configuration and API service functions for communicating with the backend.
+- `assets/`: Static assets like images or fonts.
+- `components/`: 
+  - `ui/`: Reusable, atomic UI components (buttons, inputs, cards, etc.).
+  - `Layout.tsx` & `ProtectedRoute.tsx`: Route layout and access control wrappers.
+- `contexts/`: React Contexts (e.g., `AuthContext` for managing user authentication state).
+- `lib/`: Utility functions (e.g., `utils.ts` for Tailwind class merging).
+- `pages/`: Top-level page components corresponding to different routes:
+  - `JobList`: Discover available jobs.
+  - `JobDetail`: View details of a specific job.
+  - `Apply`: Form for candidates to apply to a job.
+  - `CreateJob`: Form for recruiters to post new jobs.
+  - `Dashboard`: User dashboard (differentiated by role).
+  - `JobApplications`: Recruiter view of applications for a job.
+  - `ApplicationDetail`: Detailed view of a specific application.
+  - `Login` & `Register`: Authentication pages.
+- `types/`: Global TypeScript interfaces and types for the application payload and states.
 
-## Expanding the ESLint configuration
+## 🚀 Implementation Details
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Authentication & Authorization
+Authentication is handled using JWT (JSON Web Tokens). 
+- **`AuthContext`**: Manages the authentication state globally. It stores the currently logged-in user and token, and provides `login` and `logout` functions.
+- **`ProtectedRoute`**: A higher-order component that wraps routes requiring authentication. It checks if a user is logged in, and optionally checks if the user has the required `role` (e.g., 'candidate' or 'recruiter') to access the page. Unauthenticated users are redirected to the login page.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Routing
+The application uses React Router for client-side routing, wrapped with the `Layout` component to provide consistent navigation (e.g., Navbar).
+Routes are defined in `App.tsx` and encompass both public (JobList, JobDetail) and protected endpoints (Dashboard, Apply, CreateJob).
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### API Communication
+API requests are centralized using configured Axios instances in `src/api/client.ts`.
+- **Interceptors**: Axios interceptors are used to automatically attach the JWT token (stored in `localStorage`) to the `Authorization` header of outgoing requests. It also handles basic request logging for debugging.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### UI & Styling
+The application uses Tailwind CSS for utility-first styling. Reusable components (like Buttons, Inputs, Dialogs) are built in the `components/ui/` directory, heavily leaning on Radix UI primitives for accessibility. Forms use `react-hook-form` coupled with `zod` schema validation to provide instant, type-safe feedback to users.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠 Setup & Installation
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+2. Setup environment variables by creating a `.env` file:
+   ```env
+   VITE_API_BASE_URL=http://localhost:3000
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Build for production:
+   ```bash
+   npm run build
+   ```
+
+## 🌐 Deployment
+The project is configured as a Single Page Application (SPA). For platforms like Vercel, a `vercel.json` file is included in the root to rewrite all requests to `index.html` to allow React Router to handle the routing seamlessly without throwing 404 errors on deep links.
